@@ -1,7 +1,10 @@
+import signal
+
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 from awx.main.utils.named_url_graph import _customize_graph, generate_graph
 from awx.conf import register, fields
+from awx.main.harakiri_middleware import HarakiriLoggerMiddleware
 
 
 class MainConfig(AppConfig):
@@ -36,5 +39,5 @@ class MainConfig(AppConfig):
 
     def ready(self):
         super().ready()
-
         self.load_named_url_feature()
+        signal.signal(signal.SIGSYS, HarakiriLoggerMiddleware.handle_signal)
