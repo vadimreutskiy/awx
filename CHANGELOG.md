@@ -2,6 +2,9 @@
 
 This is a list of high-level changes for each release of AWX. A full list of commits can be found at `https://github.com/ansible/awx/releases/tag/<version>`.
 
+## 13.0.1 (Jun 23, 2020)
+- Added support for Docker Compose V2 for "Local Docker" deployment approach
+
 ## 13.0.0 (Jun 23, 2020)
 - Added import and export subcommands to the awx-cli tool, replacing send and receive from the old tower-cli (https://github.com/ansible/awx/pull/6125).
 - Removed scripts as a means of running inventory updates of built-in types (https://github.com/ansible/awx/pull/6911)
