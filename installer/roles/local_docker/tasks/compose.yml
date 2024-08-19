@@ -36,10 +36,15 @@
   register: awx_secret_key
 
 - block:
-    - name: Start the containers
-      docker_compose:
+    - name: Start the containers using Docker Compose V2
+      community.docker.docker_compose_v2:
         project_src: "{{ docker_compose_dir }}"
-        restarted: "{{ awx_compose_config is changed or awx_secret_key is changed }}"
+        state: >
+          {% if awx_compose_config is changed or awx_secret_key is changed %}
+          restarted
+          {% else %}
+          present
+          {% endif %}
       register: awx_compose_start
 
     - name: Update CA trust in awx_web container
